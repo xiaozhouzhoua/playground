@@ -1,0 +1,46 @@
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 4KB
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  datasource:
+    # h2 内存数据库，内存模式连接配置 库名: stocktest
+    url: jdbc:h2:mem:playground;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    platform: h2
+    username: admin
+    password: admin
+    # 驱动
+    driverClassName: org.h2.Driver
+    # 初始化数据表 DDL
+    schema: classpath:db/schema.sql
+    # 初始化数据 DML
+    data: classpath:db/data.sql
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+  h2:
+    # 开启console访问，默认false
+    console:
+      enabled: true
+      # h2访问路径上下文http://localhost:8080/h2-console，进入H2数据的控制台
+      path: /h2-console
+      settings:
+        # 开启h2 console跟踪，方便调试，默认false
+        trace: false
+        # 允许console远程访问，默认false
+        web-allow-others: false
+  thymeleaf:
+    cache: false
+
+server:
+  port: 8080
+
